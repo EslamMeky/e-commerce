@@ -3,6 +3,9 @@
 use Illuminate\Support\Facades\Route;
 
 
+
+
+
 Route::group(['namespace'=>'App\Http\Controllers\Site','middleware'=>'guest:web'],function (){
     Route::get('login','LoginController@login')->name('login');
     Route::post('saveLogin','LoginController@saveLogin')->name('saveLogin');
@@ -21,7 +24,7 @@ Route::group(['namespace'=>'App\Http\Controllers\Site','middleware'=>'auth:web']
 
 Route::group(['prefix'=> LaravelLocalization::setLocale(),'middleware'=> [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]],function (){
 
-    Route::group(['namespace'=>'App\Http\Controllers\Site','middleware'=>'auth:web'],function (){
+    Route::group(['namespace'=>'App\Http\Controllers\Site','middleware'=>['auth:web']],function (){
         Route::get('/','HomeController@home')->name('home');
 
 

@@ -127,13 +127,13 @@
                                         @isset($orders)
                                             @foreach($orders as $order)
                                         <tr>
-                                            <td>{{$order->num}}</td>
+                                            <td>{{$order->order_id}}</td>
                                             <td>{{$order->items}}</td>
                                             <td>{{$order->quy}}</td>
                                             <td>$ {{$order->total}}</td>
-                                            <td>{{$order->name}}</td>
-                                            <td>{{$order->mobile}}</td>
-                                            <td>{{$order->address}}</td>
+                                            <td>{{$order->order->users->name}}</td>
+                                            <td>{{$order->order->users->mobile}}</td>
+                                            <td>{{$order->order->users->address}}</td>
                                             <td>{{$order->status}}</td>
                                             <td>{{$order->created_at}}</td>
 

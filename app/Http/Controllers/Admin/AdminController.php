@@ -20,7 +20,8 @@ class AdminController extends Controller
     public function index()
     {
         $categories=SubCategory::selection()->paginate(PAGINATE);
-        $orders=Cart::select('num','items','quy','total','name','mobile','address','status','created_at')->paginate(PAGINATE);
+        $orders=Cart::with('order.users')->select('id','order_id','items','quy','total','status','created_at')->paginate(PAGINATE);
+
         return view('Admin.dashboard',compact('categories','orders'));
     }
 
@@ -31,6 +32,7 @@ class AdminController extends Controller
 
     public function store_admin(AddAdminRequest $request)
     {
+        // validation
         try {
             if ($request->input('password')==$request->input('com_password'))
             {
@@ -125,7 +127,7 @@ class AdminController extends Controller
         }
         catch (\Exception $ex)
         {
-            return $ex;
+//            return $ex;
             return redirect()->route('show_admin')->with(['error'=>'SomeThing Incorrect Try Again Later']);
 
         }

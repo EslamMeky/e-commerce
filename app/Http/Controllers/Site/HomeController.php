@@ -30,6 +30,7 @@ class HomeController extends Controller
         return view('Front.about');
     }
 
+
     public function products()
     {
         $mens=SubCategory::select('id','name_'.LaravelLocalization::getCurrentLocale().' as name',

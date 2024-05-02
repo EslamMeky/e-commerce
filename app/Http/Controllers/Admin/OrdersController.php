@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Cart;
 use App\Models\Feedback;
+use App\Models\Order;
 use App\Models\Subscribe;
 use Illuminate\Http\Request;
 
@@ -13,8 +14,10 @@ class OrdersController extends Controller
 
     public function showOrder()
     {
-       $orders= Cart::select('id','num','items','quy','total','name','mobile','address','status','created_at','updated_at')->paginate(PAGINATE);
+
+       $orders= Cart::with('order.users')->select('id','order_id','items','quy','total','status','created_at','updated_at')->paginate(PAGINATE);
        return view('Admin.orders.show',compact('orders'));
+//        return dd($orders);
     }
 
     public function deleteOrder($id)
